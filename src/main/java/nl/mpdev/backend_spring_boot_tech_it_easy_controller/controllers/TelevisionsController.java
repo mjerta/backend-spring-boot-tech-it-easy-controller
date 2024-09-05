@@ -1,6 +1,7 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.controllers;
 
 import jakarta.servlet.annotation.HttpConstraint;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,14 @@ public class TelevisionsController {
 //    Map<String, String> response = new HashMap<>();
 //    response.put("television 1","Toshiba");
 //    response.put("television 2", "LG");
-
     return ResponseEntity.status(HttpStatus.FOUND).body(televisions);
   }
 
   @GetMapping("/televisions/{id}")
   public ResponseEntity<String> getTelevisionById(@PathVariable("id") int id) {
+    if(id < 0 || id >= televisions.size()) {
+      throw new RecordNotFoundException("Record is not found");
+    }
     return ResponseEntity.status(HttpStatus.FOUND).body(televisions.get(id));
   }
 
