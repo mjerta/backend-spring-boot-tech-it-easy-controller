@@ -43,8 +43,7 @@ public class TelevisionsController {
   }
 
   @DeleteMapping("/televisions/{id}")
-//  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public String deleteTelevision(@PathVariable long id) {
-    return "test";
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteTelevision(@PathVariable long id) {
   }
 }
