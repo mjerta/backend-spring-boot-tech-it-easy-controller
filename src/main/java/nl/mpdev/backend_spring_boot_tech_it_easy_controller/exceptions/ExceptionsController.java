@@ -20,4 +20,11 @@ public class ExceptionsController {
   public ResponseEntity<Object> handleException(RecordNotFoundException ex) {
     return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
   }
+
+  @ExceptionHandler(StringTooLongException.class)
+  public ResponseEntity<Object> handleException(StringTooLongException ex) {
+    // Just an experiment to use a different syntax
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+  }
+
 }

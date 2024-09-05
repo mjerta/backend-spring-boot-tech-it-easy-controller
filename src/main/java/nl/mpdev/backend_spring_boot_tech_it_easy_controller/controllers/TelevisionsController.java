@@ -2,6 +2,7 @@ package nl.mpdev.backend_spring_boot_tech_it_easy_controller.controllers;
 
 import jakarta.servlet.annotation.HttpConstraint;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.StringTooLongException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,19 @@ public class TelevisionsController {
 
   @PostMapping("/televisions")
   public ResponseEntity<String> postTelevision(@RequestBody String television) {
+    if (television.length() > 20) {
+      throw new StringTooLongException("This string is way too long");
+    }
     televisionDataBase.add(television);
     return ResponseEntity.status(HttpStatus.CREATED).body(television);
   }
 
   @PutMapping("/televisions/{id}")
   public ResponseEntity<Object> putTelevision(@PathVariable int id, @RequestBody String television) {
-    if (id < 0 || id >= televisionDataBase.size()) {
+    if (television.length() > 20) {
+      throw new StringTooLongException("This string is way too long");
+    }
+    else if (id < 0 || id >= televisionDataBase.size()) {
       // If the id does not exist a new record will be inserted
       televisionDataBase.add(television);
       return ResponseEntity.status(HttpStatus.CREATED).body(television);
