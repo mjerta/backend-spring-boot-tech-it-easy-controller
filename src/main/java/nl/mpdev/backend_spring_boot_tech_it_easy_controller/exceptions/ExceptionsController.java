@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionsController {
 
-//  @ExceptionHandler(value = IndexOutOfBoundsException.class)
-//  public ResponseEntity<Object> handleException(IndexOutOfBoundsException ex) {
-//    HttpStatus status = HttpStatus.I_AM_A_TEAPOT;
-//    return new ResponseEntity<>("Exception id not found in list", status);
-//  }
+
+  @ExceptionHandler(value = IndexOutOfBoundsException.class)
+  public ResponseEntity<Object> handleException(IndexOutOfBoundsException ex) {
+    HttpStatus status = HttpStatus.NOT_FOUND;
+    return new ResponseEntity<>("Exception id not found in list", status);
+  }
 
   @ExceptionHandler(RecordNotFoundException.class)
   public ResponseEntity<Object> handleException(RecordNotFoundException ex) {
