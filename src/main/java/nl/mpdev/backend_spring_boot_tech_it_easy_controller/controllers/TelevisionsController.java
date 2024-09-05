@@ -30,7 +30,7 @@ public class TelevisionsController {
   @GetMapping("/televisions/{id}")
   public ResponseEntity<String> getTelevisionById(@PathVariable("id") int id) {
     if (id < 0 || id >= televisionDataBase.size()) {
-      throw new RecordNotFoundException("Record is not found");
+      throw new RecordNotFoundException();
     }
     return ResponseEntity.ok(televisionDataBase.get(id));
   }
@@ -62,7 +62,7 @@ public class TelevisionsController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteTelevision(@PathVariable int id) {
     if (id < 0 || id >= televisionDataBase.size()) {
-      throw new RecordNotFoundException("Record is not found");
+      throw new RecordNotFoundException("Television not found");
     }
     televisionDataBase.remove(televisionDataBase.get(id));
   }
