@@ -18,17 +18,16 @@ public class TelevisionsController {
 
 //  List<Television> televisionDataBase = new ArrayList<>();
 
-
   private final TelevisionService televisionService;
 
   public TelevisionsController(TelevisionService televisionService) {
     this.televisionService = televisionService;
   }
 
-// GET
+  // GET
   @GetMapping("/televisions/{id}")
   public ResponseEntity<Television> getTelevisionById(@PathVariable int id) {
-    Optional<Television> television =  televisionService.getTelevision(id);
+    Optional<Television> television = televisionService.getTelevision(id);
     if (television.isPresent()) {
       return new ResponseEntity<>(television.get(), HttpStatus.OK);
     }
@@ -40,45 +39,31 @@ public class TelevisionsController {
     return ResponseEntity.ok().body(televisionService.getTelevisions());
   }
 
-// POST
+  // POST
   @PostMapping("/televisions")
   public ResponseEntity<Object> addTelevision(@RequestBody Television television) {
 
-    if(isNameTooLong(television)) {
-      throw new StringTooLongException("This string is way too long");
-    }
+    isNameTooLong(television);
     Television newTelevision = televisionService.addTelevision(television);
     return ResponseEntity.status(HttpStatus.CREATED).body(newTelevision);
   }
-// PUT
+
+  // PUT
   @PutMapping("/televisions/{id}")
-  public ResponseEntity<Object> putTelevision(@PathVariable int id, @RequestBody Television television) {
-
-
-//      throw new StringTooLongException("This string is way too long");
-//    }
-//    else if (findTelevisionById(id) == null) {
-//      // If the id does not exist a new record will be inserted
-//      Television newTV = new Television(television);
-//      televisionDataBase.add(newTV);
-//      return ResponseEntity.status(HttpStatus.CREATED).body(newTV.getId());
-//    }
-//    findTelevisionById(id).setModel(television);
-//    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody Television television) {
+    isNameTooLong(television);
+    return ResponseEntity.ok().body(televisionService.addTelevision(television));
   }
 
   @DeleteMapping("/televisions/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteTelevision(@PathVariable int id) {
-//    if (findTelevisionById(id) == null) {
-//      throw new RecordNotFoundException("Television not found");
-//    }
-//    televisionDataBase.remove(findTelevisionById(id));
+    televisionService.deleteTelevision(id);
   }
 
-
-
-  public boolean isNameTooLong(Television television) {
-    return television.getName().length() >= 20;
+  public void isNameTooLong(Television television) {
+    if (television.getName().length() >= 20) {
+      throw new StringTooLongException("This string is way too long");
+    }
   }
 }
