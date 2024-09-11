@@ -38,28 +38,4 @@ public class Television {
   private int sold;
   private LocalDate soldDate;
 
-
-
-
-
-
-//  public Television(String model) {
-//    this.id = ++idCounter;
-//    this.model = model;
-//  }
-
-//  public Television(String model, int price) {
-//    this.id = ++idCounter;
-//    this.model = model;
-//    this.price = price;
-//
-//  }
-//
-//  public void setModel(String model) {
-//    this.model = model;
-//  }
-//
-//  public void setPrice(int price) {
-//    this.price = price;
-//  }
 }

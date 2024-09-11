@@ -48,7 +48,7 @@ public class TelevisionsController {
       throw new StringTooLongException("This string is way too long");
     }
     Television newTelevision = televisionService.addTelevision(television);
-    return ResponseEntity.status(HttpStatus.CREATED).body(newTelevision.getId());
+    return ResponseEntity.status(HttpStatus.CREATED).body(newTelevision);
   }
 //  @GetMapping("/televisions/{id}")
 //  public ResponseEntity<Television> getTelevisionById(@PathVariable("id") int id) {

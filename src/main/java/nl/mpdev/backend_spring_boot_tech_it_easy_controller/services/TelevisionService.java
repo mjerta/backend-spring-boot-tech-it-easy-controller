@@ -26,6 +26,9 @@ public class TelevisionService {
   }
 
   public Television addTelevision(Television television) {
+//    var test = television.getAvailableSize().getSize();
+//    System.out.println("test" + test);
+//    television.setAvailableSize(television.getAvailableSize().getSize());
     return televisionRepository.save(television);
   }
 }
