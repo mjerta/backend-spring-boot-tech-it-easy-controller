@@ -42,12 +42,13 @@ public class TelevisionsController {
 
 //  POST
   @PostMapping("/televisions")
-  public ResponseEntity<Television> addTelevision(@RequestBody Television television) {
+  public ResponseEntity<Object> addTelevision(@RequestBody Television television) {
 
     if(television.getName().length() >= 20) {
       throw new StringTooLongException("This string is way too long");
     }
-    return ResponseEntity.status(HttpStatus.CREATED).body(televisionService.addTelevision(television));
+    Television newTelevision = televisionService.addTelevision(television);
+    return ResponseEntity.status(HttpStatus.CREATED).body(newTelevision.getId());
   }
 //  @GetMapping("/televisions/{id}")
 //  public ResponseEntity<Television> getTelevisionById(@PathVariable("id") int id) {

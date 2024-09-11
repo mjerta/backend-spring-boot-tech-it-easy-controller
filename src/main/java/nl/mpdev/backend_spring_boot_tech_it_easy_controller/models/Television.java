@@ -22,8 +22,7 @@ public class Television {
   private String brand;
   private String name;
   private double price;
-
-  // This is optional in this case, I like to put it as a default
+  // This is optional in this case. Its a default.
 //  @Enumerated(EnumType.ORDINAL)
   private AvailableSize availableSize;
   private RefreshRate refreshRate;

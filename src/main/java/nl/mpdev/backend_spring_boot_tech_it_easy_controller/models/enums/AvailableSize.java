@@ -14,4 +14,7 @@ public enum AvailableSize {
     this.size = size;
   }
 
+  public int getSize() {
+    return size;
+  }
 }
