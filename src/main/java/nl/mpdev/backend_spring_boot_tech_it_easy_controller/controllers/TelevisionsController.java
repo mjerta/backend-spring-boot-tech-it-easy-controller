@@ -52,7 +52,7 @@ public class TelevisionsController {
   @PutMapping("/televisions/{id}")
   public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody Television television) {
     isNameTooLong(television);
-    return ResponseEntity.ok().body(televisionService.addTelevision(television));
+    return ResponseEntity.ok().body(televisionService.updateTelevision(id ,television));
   }
 
   @DeleteMapping("/televisions/{id}")
@@ -61,7 +61,7 @@ public class TelevisionsController {
     televisionService.deleteTelevision(id);
   }
 
-  public void isNameTooLong(Television television) {
+  private void isNameTooLong(Television television) {
     if (television.getName().length() >= 20) {
       throw new StringTooLongException("This string is way too long");
     }

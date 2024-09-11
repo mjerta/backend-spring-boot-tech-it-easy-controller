@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 public class TelevisionService {
 
-
   private final TelevisionRepository televisionRepository;
 
   public TelevisionService(TelevisionRepository televisionRepository) {
@@ -30,8 +29,8 @@ public class TelevisionService {
     return televisionRepository.save(television);
   }
 
-  public Television updateTelevision(Television television) {
-    findRecordById(television.getId());
+  public Television updateTelevision(int id, Television television) {
+    findRecordById(id);
     return televisionRepository.save(television);
   }
 
@@ -41,7 +40,7 @@ public class TelevisionService {
   }
 
   private void findRecordById(int id) {
-    if(televisionRepository.existsById(id)) {
+    if (!televisionRepository.existsById(id)) {
       throw new RecordNotFoundException("This record does not exist");
     }
   }
