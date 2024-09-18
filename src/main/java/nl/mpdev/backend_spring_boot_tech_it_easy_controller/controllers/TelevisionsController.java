@@ -1,5 +1,6 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.controllers;
 
+import jakarta.validation.Valid;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteInputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesInputDto;
@@ -49,7 +50,7 @@ public class TelevisionsController {
 
   // POST
   @PostMapping("/televisions")
-  public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+  public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
     TelevisionCompleteOutputDTO newTelevision = televisionService.addTelevision(televisionCompleteInputDto);
     URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newTelevision.getId()).toUriString());
     return ResponseEntity.created(uri).body(newTelevision);

@@ -1,14 +1,30 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions;
 
+import org.apache.coyote.Response;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionsController {
 
+  @ExceptionHandler(value = MethodArgumentNotValidException.class)
+  public ResponseEntity<Object> handleException(MethodArgumentNotValidException ex) {
+      Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream().
+        collect(Collectors.toMap(
+          FieldError::getField,
+          FieldError::getDefaultMessage
+        ));
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+  }
 
   @ExceptionHandler(value = IndexOutOfBoundsException.class)
   public ResponseEntity<Object> handleException(IndexOutOfBoundsException ex) {
