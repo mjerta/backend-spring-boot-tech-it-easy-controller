@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/televisions")
 public class TelevisionsController {
 
 //  List<Television> televisionDataBase = new ArrayList<>();
@@ -32,37 +32,50 @@ public class TelevisionsController {
   }
 
   // GET
-  @GetMapping("/televisions/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable int id) {
     return ResponseEntity.ok().body(televisionService.getTelevision(id));
   }
 
   //   specially for sales (controller REST endpoint)
-  @GetMapping("/televisions/{id}/sales")
+  @GetMapping("/{id}/sales")
   public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable int id) {
     return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
   }
 
-  @GetMapping("/televisions")
+  @GetMapping("/")
   public ResponseEntity<List<TelevisionCompleteOutputDTO>> getTelevisions() {
     return ResponseEntity.ok().body(televisionService.getTelevisions());
   }
 
+  @GetMapping("/televisions/sales")
+  public ResponseEntity<List<TelevisionSalesOutputDto>> getTelevisionsSales() {
+    return ResponseEntity.ok().body(televisionService.getTelevisionsSales());
+  }
+
   // POST
-  @PostMapping("/televisions")
+  @PostMapping("/")
   public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
     TelevisionCompleteOutputDTO newTelevision = televisionService.addTelevision(televisionCompleteInputDto);
     URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newTelevision.getId()).toUriString());
     return ResponseEntity.created(uri).body(newTelevision);
   }
 
+  @PostMapping("/sales")
+  public ResponseEntity<TelevisionSalesOutputDto> addTelevisionSales(@Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+    TelevisionSalesOutputDto newTelevision = televisionService.addTelevisionSales(televisionSalesInputDto);
+    // I try to figure out how i can give back the URI more dynamically for this case but I dont know how to do it yet.
+    URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/televisions/" + newTelevision.getId() + "/sales").toUriString());
+    return ResponseEntity.created(uri).body(newTelevision);
+  }
+
   // PUT
-  @PutMapping("/televisions/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody Television television) {
     return ResponseEntity.ok().body(televisionService.updateTelevision(id, television));
   }
 
-  @DeleteMapping("/televisions/{id}")
+  @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteTelevision(@PathVariable int id) {
     televisionService.deleteTelevision(id);

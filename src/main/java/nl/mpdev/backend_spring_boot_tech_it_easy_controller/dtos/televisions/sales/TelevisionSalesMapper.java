@@ -12,6 +12,7 @@ public class TelevisionSalesMapper {
     television.setBrand(televisionSalesInputDto.getBrand());
     television.setName(televisionSalesInputDto.getName());
     television.setPrice(televisionSalesInputDto.getPrice());
+    television.setOriginalStock(televisionSalesInputDto.getOriginalStock());
     television.setSold(televisionSalesInputDto.getSold());
     return television;
   }
@@ -22,6 +23,7 @@ public class TelevisionSalesMapper {
     televisionSalesOutputDto.setBrand(television.getBrand());
     televisionSalesOutputDto.setName(television.getName());
     televisionSalesOutputDto.setPrice(television.getPrice());
+    televisionSalesOutputDto.setOriginalStock(television.getOriginalStock());
     televisionSalesOutputDto.setSold(television.getSold());
     return televisionSalesOutputDto;
   }

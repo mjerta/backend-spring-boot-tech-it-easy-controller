@@ -43,13 +43,22 @@ public class TelevisionService {
 
   public List<TelevisionCompleteOutputDTO> getTelevisions() {
     List<Television> televisions = televisionRepository.findAll();
-
     return televisions.stream().map(televisionCompleteMapper::toDto).collect(Collectors.toList());
+  }
+
+  public List<TelevisionSalesOutputDto> getTelevisionsSales() {
+    List<Television> televisions = televisionRepository.findAll();
+    return televisions.stream().map(televisionSalesMapper::toDto).collect(Collectors.toList());
   }
 
   public TelevisionCompleteOutputDTO addTelevision(TelevisionCompleteInputDto televisionCompleteInputDto) {
     Television television = televisionRepository.save(televisionCompleteMapper.toEntity(televisionCompleteInputDto));
     return televisionCompleteMapper.toDto(television);
+  }
+
+  public TelevisionSalesOutputDto addTelevisionSales(TelevisionSalesInputDto televisionSalesInputDto) {
+    Television television = televisionRepository.save(televisionSalesMapper.toEntity(televisionSalesInputDto));
+    return televisionSalesMapper.toDto(television);
   }
 
   public Television updateTelevision(int id, Television television) {
