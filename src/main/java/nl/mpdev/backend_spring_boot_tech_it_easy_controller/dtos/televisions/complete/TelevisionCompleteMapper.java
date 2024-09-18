@@ -32,6 +32,7 @@ public class TelevisionCompleteMapper {
 
   public TelevisionCompleteOutputDTO toDto(Television television) {
     TelevisionCompleteOutputDTO televisionCompleteOutputDTO = new TelevisionCompleteOutputDTO();
+    televisionCompleteOutputDTO.setId(television.getId());
     televisionCompleteOutputDTO.setBrand(television.getBrand());
     televisionCompleteOutputDTO.setName(television.getName());
     televisionCompleteOutputDTO.setPrice(television.getPrice());

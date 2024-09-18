@@ -2,7 +2,6 @@ package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.co
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.TelevisionBaseDto;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -13,7 +12,7 @@ public class TelevisionCompleteOutputDTO extends TelevisionCompleteInputDto {
   private double priceWithVat;
   private long daysSinceSold;
 
-  private long calulateDaysBetweenSold(LocalDate oldDate) {
+  private long calculateDaysBetweenSold(LocalDate oldDate) {
     return ChronoUnit.DAYS.between(oldDate, LocalDate.now());
   }
 
@@ -22,6 +21,7 @@ public class TelevisionCompleteOutputDTO extends TelevisionCompleteInputDto {
   }
 
   public void setDaysSinceSold(LocalDate oldDate) {
-    this.daysSinceSold = calulateDaysBetweenSold(super.getSoldDate());
+    this.daysSinceSold = calculateDaysBetweenSold(super.getSoldDate());
   }
 }
+

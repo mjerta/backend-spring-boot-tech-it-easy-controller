@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class TelevisionBaseDto {
-  @Getter
+  @Getter @Setter
   private int id;
   @Getter @Setter
   private String brand;
