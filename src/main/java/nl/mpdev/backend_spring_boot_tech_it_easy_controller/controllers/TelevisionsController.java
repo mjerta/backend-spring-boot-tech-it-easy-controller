@@ -1,5 +1,6 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.controllers;
 
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.StringTooLongException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
@@ -26,12 +27,8 @@ public class TelevisionsController {
 
   // GET
   @GetMapping("/televisions/{id}")
-  public ResponseEntity<Television> getTelevisionById(@PathVariable int id) {
-    Optional<Television> television = televisionService.getTelevision(id);
-    if (television.isPresent()) {
-      return new ResponseEntity<>(television.get(), HttpStatus.OK);
-    }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable int id) {
+    return ResponseEntity.ok().body(televisionService.getTelevision(id));
   }
 
   @GetMapping("/televisions")

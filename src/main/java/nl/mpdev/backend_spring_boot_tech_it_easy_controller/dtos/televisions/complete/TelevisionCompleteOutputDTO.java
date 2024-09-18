@@ -13,12 +13,15 @@ public class TelevisionCompleteOutputDTO extends TelevisionCompleteInputDto {
   private double priceWithVat;
   private long daysSinceSold;
 
-  public TelevisionCompleteOutputDTO() {
-    this.priceWithVat = super.getPrice() * .21;
-    this.daysSinceSold = calulateDaysBetweenSold(super.getSoldDate());
-  }
-
   private long calulateDaysBetweenSold(LocalDate oldDate) {
     return ChronoUnit.DAYS.between(oldDate, LocalDate.now());
+  }
+
+  public void setPriceWithVat(double oldPrice) {
+    this.priceWithVat = oldPrice * 1.21;
+  }
+
+  public void setDaysSinceSold(LocalDate oldDate) {
+    this.daysSinceSold = calulateDaysBetweenSold(super.getSoldDate());
   }
 }

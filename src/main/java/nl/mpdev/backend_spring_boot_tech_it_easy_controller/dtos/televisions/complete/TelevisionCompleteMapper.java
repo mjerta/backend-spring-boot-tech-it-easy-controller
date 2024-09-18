@@ -1,7 +1,9 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete;
 
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TelevisionCompleteMapper {
 
 
@@ -46,6 +48,8 @@ public class TelevisionCompleteMapper {
     televisionCompleteOutputDTO.setOriginalStock(television.getOriginalStock());
     televisionCompleteOutputDTO.setSold(television.getSold());
     televisionCompleteOutputDTO.setSoldDate(television.getSoldDate());
+    televisionCompleteOutputDTO.setPriceWithVat(television.getPrice());
+    televisionCompleteOutputDTO.setDaysSinceSold(television.getSoldDate());
 
     return televisionCompleteOutputDTO;
   }
