@@ -43,7 +43,7 @@ public class TelevisionsController {
     return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
   }
 
-  @GetMapping("/")
+  @GetMapping("")
   public ResponseEntity<List<TelevisionCompleteOutputDTO>> getTelevisions() {
     return ResponseEntity.ok().body(televisionService.getTelevisions());
   }
@@ -54,7 +54,7 @@ public class TelevisionsController {
   }
 
   // POST
-  @PostMapping("/")
+  @PostMapping("")
   public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
     TelevisionCompleteOutputDTO newTelevision = televisionService.addTelevision(televisionCompleteInputDto);
     URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newTelevision.getId()).toUriString());
@@ -71,8 +71,8 @@ public class TelevisionsController {
 
   // PUT
   @PutMapping("/{id}")
-  public ResponseEntity<Object> updateTelevision(@PathVariable int id, @RequestBody Television television) {
-    return ResponseEntity.ok().body(televisionService.updateTelevision(id, television));
+  public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+    return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionCompleteInputDto));
   }
 
   @DeleteMapping("/{id}")
