@@ -38,7 +38,7 @@ public class TelevisionsController {
   }
 
   //   specially for sales (controller REST endpoint)
-  @GetMapping("/sales/{id}")
+  @GetMapping("/televisions/{id}/sales")
   public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable int id) {
     return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
   }
