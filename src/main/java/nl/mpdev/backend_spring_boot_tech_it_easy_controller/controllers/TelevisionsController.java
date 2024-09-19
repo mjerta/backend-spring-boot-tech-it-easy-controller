@@ -71,9 +71,15 @@ public class TelevisionsController {
 
   // PUT
   @PutMapping("/{id}")
-  public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+  public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
     return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionCompleteInputDto));
   }
+
+  @PutMapping("/{id}/sales")
+  public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSales(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+    return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionSalesInputDto));
+  }
+
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)

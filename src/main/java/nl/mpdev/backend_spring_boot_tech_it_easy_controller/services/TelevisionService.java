@@ -72,6 +72,12 @@ public class TelevisionService {
     return televisionCompleteMapper.toDto(televisionRepository.save(existingTelevision));
   }
 
+  public TelevisionSalesOutputDto updateTelevision(int id, TelevisionSalesInputDto televisionSalesInputDto) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    BeanUtils.copyProperties(televisionSalesInputDto, existingTelevision, "id");
+    return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
+  }
+
   public void deleteTelevision(int id) {
     televisionRepository.deleteById(id);
   }
