@@ -49,7 +49,7 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.getTelevisions());
     }
 
-    @GetMapping("/televisions/sales")
+    @GetMapping("/sales")
     public ResponseEntity<List<TelevisionSalesOutputDto>> getTelevisionsSales() {
         return ResponseEntity.ok().body(televisionService.getTelevisionsSales());
     }
