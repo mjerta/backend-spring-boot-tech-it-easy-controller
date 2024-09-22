@@ -7,7 +7,7 @@ import lombok.Setter;
 
 public class TelevisionBaseDto {
   @Getter @Setter
-  private int id;
+  private Integer id;
   @Getter @Setter
   @NotEmpty(message = "This field is required.")
   private String brand;

@@ -21,21 +21,21 @@ public class Television {
   private Integer id;
   private String brand;
   private String name;
-  private double price;
+  private Double price;
   // This is optional in this case. Its a default.
 //  @Enumerated(EnumType.ORDINAL)
   private AvailableSize availableSize;
   private RefreshRate refreshRate;
   private ScreenType screenType;
   private ScreenQuality screenQuality;
-  private boolean smartTV;
-  private boolean wifi;
-  private boolean voiceControl;
-  private boolean hdr;
-  private boolean bluetooth;
-  private boolean ambiLight;
-  private int originalStock;
-  private int sold;
+  private Boolean smartTV;
+  private Boolean wifi;
+  private Boolean voiceControl;
+  private Boolean hdr;
+  private Boolean bluetooth;
+  private Boolean ambiLight;
+  private Integer originalStock;
+  private Integer sold;
   private LocalDate soldDate;
 
 }

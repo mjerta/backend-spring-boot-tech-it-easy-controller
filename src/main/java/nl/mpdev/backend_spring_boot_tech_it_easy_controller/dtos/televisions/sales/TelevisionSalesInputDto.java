@@ -7,8 +7,8 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.Tel
 @Getter
 @Setter
 public class TelevisionSalesInputDto extends TelevisionBaseDto {
-  private double price;
-  private int originalStock;
-  private int sold;
+  private Double price;
+  private Integer originalStock;
+  private Integer sold;
 
 }

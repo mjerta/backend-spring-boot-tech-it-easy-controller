@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -25,66 +26,78 @@ public class TelevisionsController {
 
 //  List<Television> televisionDataBase = new ArrayList<>();
 
-  private final TelevisionService televisionService;
+    private final TelevisionService televisionService;
 
-  public TelevisionsController(TelevisionService televisionService) {
-    this.televisionService = televisionService;
-  }
+    public TelevisionsController(TelevisionService televisionService) {
+        this.televisionService = televisionService;
+    }
 
-  // GET
-  @GetMapping("/{id}")
-  public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable int id) {
-    return ResponseEntity.ok().body(televisionService.getTelevision(id));
-  }
+    // GET
+    @GetMapping("/{id}")
+    public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable int id) {
+        return ResponseEntity.ok().body(televisionService.getTelevision(id));
+    }
 
-  //   specially for sales (controller REST endpoint)
-  @GetMapping("/{id}/sales")
-  public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable int id) {
-    return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
-  }
+    //   specially for sales (controller REST endpoint)
+    @GetMapping("/{id}/sales")
+    public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable int id) {
+        return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
+    }
 
-  @GetMapping("")
-  public ResponseEntity<List<TelevisionCompleteOutputDTO>> getTelevisions() {
-    return ResponseEntity.ok().body(televisionService.getTelevisions());
-  }
+    @GetMapping("")
+    public ResponseEntity<List<TelevisionCompleteOutputDTO>> getTelevisions() {
+        return ResponseEntity.ok().body(televisionService.getTelevisions());
+    }
 
-  @GetMapping("/televisions/sales")
-  public ResponseEntity<List<TelevisionSalesOutputDto>> getTelevisionsSales() {
-    return ResponseEntity.ok().body(televisionService.getTelevisionsSales());
-  }
+    @GetMapping("/televisions/sales")
+    public ResponseEntity<List<TelevisionSalesOutputDto>> getTelevisionsSales() {
+        return ResponseEntity.ok().body(televisionService.getTelevisionsSales());
+    }
 
-  // POST
-  @PostMapping("")
-  public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
-    TelevisionCompleteOutputDTO newTelevision = televisionService.addTelevision(televisionCompleteInputDto);
-    URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newTelevision.getId()).toUriString());
-    return ResponseEntity.created(uri).body(newTelevision);
-  }
+    // POST
+    @PostMapping("")
+    public ResponseEntity<TelevisionCompleteOutputDTO> addTelevision(@Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+        TelevisionCompleteOutputDTO newTelevision = televisionService.addTelevision(televisionCompleteInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + newTelevision.getId()).toUriString());
+        return ResponseEntity.created(uri).body(newTelevision);
+    }
 
-  @PostMapping("/sales")
-  public ResponseEntity<TelevisionSalesOutputDto> addTelevisionSales(@Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
-    TelevisionSalesOutputDto newTelevision = televisionService.addTelevisionSales(televisionSalesInputDto);
-    // I try to figure out how i can give back the URI more dynamically for this case but I dont know how to do it yet.
-    URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/televisions/" + newTelevision.getId() + "/sales").toUriString());
-    return ResponseEntity.created(uri).body(newTelevision);
-  }
+    @PostMapping("/sales")
+    public ResponseEntity<TelevisionSalesOutputDto> addTelevisionSales(@Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+        TelevisionSalesOutputDto newTelevision = televisionService.addTelevisionSales(televisionSalesInputDto);
+        // I try to figure out how i can give back the URI more dynamically for this case but I dont know how to do it yet.
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/televisions/" + newTelevision.getId() + "/sales").toUriString());
+        return ResponseEntity.created(uri).body(newTelevision);
+    }
 
-  // PUT
-  @PutMapping("/{id}")
-  public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
-    return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionCompleteInputDto));
-  }
+    // PUT
+    @PutMapping("/{id}")
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+        return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionCompleteInputDto));
+    }
 
-  @PutMapping("/{id}/sales")
-  public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSales(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
-    return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionSalesInputDto));
-  }
+    @PutMapping("/{id}/sales")
+    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSales(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+        return ResponseEntity.ok().body(televisionService.updateTelevisionSales(id, televisionSalesInputDto));
+    }
 
 
-  @DeleteMapping("/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteTelevision(@PathVariable int id) {
-    televisionService.deleteTelevision(id);
-  }
+    // PATCH
+    @PatchMapping("/{id}")
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionFields(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+        return ResponseEntity.ok().body(televisionService.updateTelevisionFields(id, televisionCompleteInputDto));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSalesFields(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+        return ResponseEntity.ok().body(televisionService.updateTelevisionSalesFields(id, televisionSalesInputDto));
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTelevision(@PathVariable int id) {
+        televisionService.deleteTelevision(id);
+    }
 
 }

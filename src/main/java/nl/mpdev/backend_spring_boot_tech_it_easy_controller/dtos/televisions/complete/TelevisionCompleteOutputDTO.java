@@ -9,14 +9,14 @@ import java.time.temporal.ChronoUnit;
 @Setter
 public class TelevisionCompleteOutputDTO extends TelevisionCompleteInputDto {
 
-  private double priceWithVat;
-  private long daysSinceSold;
+  private Double priceWithVat;
+  private Long daysSinceSold;
 
   private long calculateDaysBetweenSold(LocalDate oldDate) {
     return ChronoUnit.DAYS.between(oldDate, LocalDate.now());
   }
 
-  public void setPriceWithVat(double oldPrice) {
+  public void setPriceWithVat(Double oldPrice) {
     this.priceWithVat = oldPrice * 1.21;
   }
 

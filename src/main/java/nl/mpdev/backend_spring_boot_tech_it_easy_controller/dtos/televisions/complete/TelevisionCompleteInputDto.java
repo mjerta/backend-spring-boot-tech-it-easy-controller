@@ -12,18 +12,20 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class TelevisionCompleteInputDto extends TelevisionBaseDto {
-  private double price;
+  private Double price;
   private AvailableSize availableSize;
   private RefreshRate refreshRate;
   private ScreenType screenType;
   private ScreenQuality screenQuality;
-  private boolean smartTV;
-  private boolean wifi;
-  private boolean voiceControl;
-  private boolean hdr;
-  private boolean bluetooth;
-  private boolean ambiLight;
-  private int originalStock;
-  private int sold;
+  private Boolean smartTV;
+  private Boolean wifi;
+  private Boolean voiceControl;
+  private Boolean hdr;
+  private Boolean bluetooth;
+  private Boolean ambiLight;
+  private Integer originalStock;
+  private Integer sold;
   private LocalDate soldDate;
+
+
 }
