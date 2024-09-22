@@ -1,10 +1,12 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete;
 
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.TelevisionBaseDto;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.mappers.Mapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TelevisionCompleteMapper {
+public class TelevisionCompleteMapper implements Mapper<TelevisionCompleteInputDto, TelevisionCompleteOutputDTO> {
 
 
     public Television toEntity(TelevisionCompleteInputDto televisionCompleteInputDto) {
@@ -29,6 +31,7 @@ public class TelevisionCompleteMapper {
         return television;
 
     }
+
 
     public TelevisionCompleteOutputDTO toDto(Television television) {
         TelevisionCompleteOutputDTO televisionCompleteOutputDTO = new TelevisionCompleteOutputDTO();
