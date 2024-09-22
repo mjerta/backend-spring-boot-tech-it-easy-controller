@@ -5,9 +5,6 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.com
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesInputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesOutputDto;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.StringTooLongException;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.services.TelevisionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/televisions")

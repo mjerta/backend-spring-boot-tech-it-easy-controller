@@ -49,6 +49,9 @@ public class TelevisionCompleteMapper {
         televisionCompleteOutputDTO.setOriginalStock(television.getOriginalStock());
         televisionCompleteOutputDTO.setSold(television.getSold());
         televisionCompleteOutputDTO.setSoldDate(television.getSoldDate());
+        if (televisionCompleteOutputDTO.getAvailableSize() != null) {
+            televisionCompleteOutputDTO.setValueOfAvailableSize(television.getAvailableSize().getSize());
+        }
         if (television.getPrice() != null) {
             televisionCompleteOutputDTO.setPriceWithVat(television.getPrice());
         }

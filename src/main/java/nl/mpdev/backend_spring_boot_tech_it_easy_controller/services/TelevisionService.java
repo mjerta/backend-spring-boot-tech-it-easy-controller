@@ -1,6 +1,5 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.services;
 
-import jakarta.persistence.EntityNotFoundException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteInputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
@@ -12,8 +11,6 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNot
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.TelevisionRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
