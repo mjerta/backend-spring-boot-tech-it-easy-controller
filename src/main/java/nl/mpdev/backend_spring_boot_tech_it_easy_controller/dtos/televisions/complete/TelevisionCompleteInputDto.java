@@ -1,29 +1,18 @@
-package nl.mpdev.backend_spring_boot_tech_it_easy_controller.models;
+package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.TelevisionBaseDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.AvailableSize;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.RefreshRate;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenQuality;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenType;
 
 import java.time.LocalDate;
-
-@Data
-@Entity
-@Table(name = "Televisions")
-public class Television {
-//   Simulating the counter from an automatic increment from a database
-//  private static  int idCounter;
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  private String brand;
-  private String name;
+@Getter
+@Setter
+public class TelevisionCompleteInputDto extends TelevisionBaseDto {
   private Double price;
-  // This is optional in this case. Its a default.
-//  @Enumerated(EnumType.ORDINAL)
   private AvailableSize availableSize;
   private RefreshRate refreshRate;
   private ScreenType screenType;
@@ -37,5 +26,6 @@ public class Television {
   private Integer originalStock;
   private Integer sold;
   private LocalDate soldDate;
+
 
 }
