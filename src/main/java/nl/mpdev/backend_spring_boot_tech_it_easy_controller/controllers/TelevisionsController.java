@@ -88,7 +88,7 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionFields(id, televisionCompleteInputDto));
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/sales")
     public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSalesFields(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSalesFields(id, televisionSalesInputDto));
     }
