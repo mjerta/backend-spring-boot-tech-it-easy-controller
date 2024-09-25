@@ -1,6 +1,7 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.controllers;
 
 import jakarta.validation.Valid;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.general.IdInputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteInputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesInputDto;
@@ -77,9 +78,9 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSales(id, televisionSalesInputDto));
     }
 
-    @PutMapping("/{id}/remotes/{remoteId}")
-    public ResponseEntity<Void> updateTelevisionWithRemote(@PathVariable Long id, @PathVariable Long remoteId) {
-        televisionService.updateTelevisionWithRemote(id, remoteId);
+    @PutMapping("/{id}/remotes")
+    public ResponseEntity<Void> updateTelevisionWithRemote(@PathVariable Long id, @RequestBody IdInputDto idInputDto) {
+        televisionService.updateTelevisionWithRemote(id, idInputDto);
         return ResponseEntity.noContent().build();
     }
 

@@ -2,6 +2,7 @@ package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.co
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.remotes.RemoteCompleteOutputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesInputDto;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class TelevisionCompleteOutputDTO extends TelevisionCompleteInputDto {
   private Double priceWithVat;
   private Long daysSinceSold;
   private Integer valueOfAvailableSize;
+  private RemoteCompleteOutputDto remoteCompleteOutputDto;
 
 
   private long calculateDaysBetweenSold(LocalDate oldDate) {
