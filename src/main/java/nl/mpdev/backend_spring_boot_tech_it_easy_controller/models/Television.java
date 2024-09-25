@@ -37,6 +37,9 @@ public class Television {
   private Integer originalStock;
   private Integer sold;
   private LocalDate soldDate;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "Remote_id", referencedColumnName = "id")
+  private Remote remote;
 
 
 }

@@ -28,13 +28,13 @@ public class TelevisionsController {
 
     // GET
     @GetMapping("/{id}")
-    public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable int id) {
+    public ResponseEntity<TelevisionCompleteOutputDTO> getTelevisionById(@PathVariable Long id) {
         return ResponseEntity.ok().body(televisionService.getTelevision(id));
     }
 
     //   specially for sales (controller REST endpoint)
     @GetMapping("/{id}/sales")
-    public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable int id) {
+    public ResponseEntity<TelevisionSalesOutputDto> getTelevisionSalesById(@PathVariable Long id) {
         return ResponseEntity.ok().body(televisionService.getSalesTelevision(id));
     }
 
@@ -66,31 +66,31 @@ public class TelevisionsController {
 
     // PUT
     @PutMapping("/{id}")
-    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable Long id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
         return ResponseEntity.ok().body(televisionService.updateTelevision(id, televisionCompleteInputDto));
     }
 
     @PutMapping("/{id}/sales")
-    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSales(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSales(@PathVariable Long id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSales(id, televisionSalesInputDto));
     }
 
 
     // PATCH
     @PatchMapping("/{id}")
-    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionFields(@PathVariable int id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionFields(@PathVariable Long id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
         return ResponseEntity.ok().body(televisionService.updateTelevisionFields(id, televisionCompleteInputDto));
     }
 
     @PatchMapping("/{id}/sales")
-    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSalesFields(@PathVariable int id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
+    public ResponseEntity<TelevisionSalesOutputDto> updateTelevisionSalesFields(@PathVariable Long id, @Valid @RequestBody TelevisionSalesInputDto televisionSalesInputDto) {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSalesFields(id, televisionSalesInputDto));
     }
 
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTelevision(@PathVariable int id) {
+    public void deleteTelevision(@PathVariable Long id) {
         televisionService.deleteTelevision(id);
     }
 
