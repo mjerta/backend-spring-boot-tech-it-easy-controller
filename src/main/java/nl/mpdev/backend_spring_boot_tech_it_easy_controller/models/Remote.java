@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Table(name = "Remotes")
 public class Remote {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -16,6 +15,6 @@ public class Remote {
   private String brand;
   private Double price;
   private Integer originalStock;
-
-
+//  @OneToOne(mappedBy = "remote")
+//  private Television television;
 }

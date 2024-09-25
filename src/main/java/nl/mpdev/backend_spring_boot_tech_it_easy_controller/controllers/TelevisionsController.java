@@ -77,8 +77,8 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSales(id, televisionSalesInputDto));
     }
 
-    @PutMapping("/{id}/remote/{remoteId}")
-    public ResponseEntity<Void> addRemoteToTelevision(@PathVariable Long id, @PathVariable Long remoteId) {
+    @PutMapping("/{id}/remotes/{remoteId}")
+    public ResponseEntity<Void> updateTelevisionWithRemote(@PathVariable Long id, @PathVariable Long remoteId) {
         televisionService.updateTelevisionWithRemote(id, remoteId);
         return ResponseEntity.noContent().build();
     }

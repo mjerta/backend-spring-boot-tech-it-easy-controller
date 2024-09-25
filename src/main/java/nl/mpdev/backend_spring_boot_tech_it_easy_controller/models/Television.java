@@ -14,9 +14,6 @@ import java.util.List;
 @Entity
 @Table(name = "Televisions")
 public class Television {
-//   Simulating the counter from an automatic increment from a database
-//  private static  int idCounter;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -39,8 +36,15 @@ public class Television {
   private Integer sold;
   private LocalDate soldDate;
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "Remote_id", referencedColumnName = "id")
+  // remote_id is also the default based on the attribute name + the _id
+  // Also the referencedColumnname the default will be assigned to the primary key of the target enitty
+  @JoinColumn(name = "remote_id", referencedColumnName = "id")
   private Remote remote;
+
+
+
+
+
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "cimodule_id")
   private CIModule ciModule;
@@ -51,5 +55,4 @@ public class Television {
     inverseJoinColumns = @JoinColumn(name = "wallbracket")
   )
   private List<WallBracket> wallBrackets;
-
 }
