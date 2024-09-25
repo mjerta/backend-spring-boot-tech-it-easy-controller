@@ -11,6 +11,7 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.GeneralEx
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Remote;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.CIModuleRepository;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.RemoteRepository;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.TelevisionRepository;
 import org.springframework.beans.BeanUtils;
@@ -23,114 +24,120 @@ import java.util.stream.Collectors;
 @Service
 public class TelevisionService {
 
-    private final TelevisionRepository televisionRepository;
-    private final RemoteRepository remoteRepository;
-    private final TelevisionCompleteTelevisionMapper televisionCompleteMapper;
-    private final TelevisionSalesTelevisionMapper televisionSalesMapper;
+  private final TelevisionRepository televisionRepository;
+  private final RemoteRepository remoteRepository;
+  private final CIModuleRepository ciModuleRepository;
+  private final TelevisionCompleteTelevisionMapper televisionCompleteMapper;
+  private final TelevisionSalesTelevisionMapper televisionSalesMapper;
 
-    public TelevisionService(TelevisionRepository televisionRepository, RemoteRepository remoteRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
-                             TelevisionSalesTelevisionMapper televisionSalesMapper) {
+  public TelevisionService(TelevisionRepository televisionRepository, RemoteRepository remoteRepository,
+                           CIModuleRepository ciModuleRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
+                           TelevisionSalesTelevisionMapper televisionSalesMapper) {
 
-        this.televisionRepository = televisionRepository;
-        this.remoteRepository = remoteRepository;
-        this.televisionCompleteMapper = televisionCompleteMapper;
-        this.televisionSalesMapper = televisionSalesMapper;
-    }
+    this.televisionRepository = televisionRepository;
+    this.remoteRepository = remoteRepository;
+    this.ciModuleRepository = ciModuleRepository;
+    this.televisionCompleteMapper = televisionCompleteMapper;
+    this.televisionSalesMapper = televisionSalesMapper;
+  }
 
-    public TelevisionCompleteOutputDTO getTelevision(Long id) {
-        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        return televisionCompleteMapper.toDto(television);
-    }
+  public TelevisionCompleteOutputDTO getTelevision(Long id) {
+    Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    return televisionCompleteMapper.toDto(television);
+  }
 
-    public TelevisionSalesOutputDto getSalesTelevision(Long id) {
-        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        return televisionSalesMapper.toDto(television);
-    }
+  public TelevisionSalesOutputDto getSalesTelevision(Long id) {
+    Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    return televisionSalesMapper.toDto(television);
+  }
 
-    public List<TelevisionCompleteOutputDTO> getTelevisions() {
-        List<Television> televisions = televisionRepository.findAll();
-        return televisions.stream().map(televisionCompleteMapper::toDto).collect(Collectors.toList());
-    }
+  public List<TelevisionCompleteOutputDTO> getTelevisions() {
+    List<Television> televisions = televisionRepository.findAll();
+    return televisions.stream().map(televisionCompleteMapper::toDto).collect(Collectors.toList());
+  }
 
-    public List<TelevisionSalesOutputDto> getTelevisionsSales() {
-        List<Television> televisions = televisionRepository.findAll();
-        return televisions.stream().map(televisionSalesMapper::toDto).collect(Collectors.toList());
-    }
+  public List<TelevisionSalesOutputDto> getTelevisionsSales() {
+    List<Television> televisions = televisionRepository.findAll();
+    return televisions.stream().map(televisionSalesMapper::toDto).collect(Collectors.toList());
+  }
 
-    public TelevisionCompleteOutputDTO addTelevision(TelevisionCompleteInputDto televisionCompleteInputDto) {
-        Television television = televisionRepository.save(televisionCompleteMapper.toEntity(televisionCompleteInputDto));
-        return televisionCompleteMapper.toDto(television);
-    }
+  public TelevisionCompleteOutputDTO addTelevision(TelevisionCompleteInputDto televisionCompleteInputDto) {
+    Television television = televisionRepository.save(televisionCompleteMapper.toEntity(televisionCompleteInputDto));
+    return televisionCompleteMapper.toDto(television);
+  }
 
-    public TelevisionSalesOutputDto addTelevisionSales(TelevisionSalesInputDto televisionSalesInputDto) {
-        Television television = televisionRepository.save(televisionSalesMapper.toEntity(televisionSalesInputDto));
-        return televisionSalesMapper.toDto(television);
-    }
+  public TelevisionSalesOutputDto addTelevisionSales(TelevisionSalesInputDto televisionSalesInputDto) {
+    Television television = televisionRepository.save(televisionSalesMapper.toEntity(televisionSalesInputDto));
+    return televisionSalesMapper.toDto(television);
+  }
 
-    public TelevisionCompleteOutputDTO updateTelevision(Long id, TelevisionCompleteInputDto televisionCompleteInputDto) {
-        Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        BeanUtils.copyProperties(televisionCompleteInputDto, existingTelevision, "id");
-        return televisionCompleteMapper.toDto(televisionRepository.save(existingTelevision));
-    }
+  // PUT
 
-    public TelevisionSalesOutputDto updateTelevisionSales(Long id, TelevisionSalesInputDto televisionSalesInputDto) {
-        Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        BeanUtils.copyProperties(televisionSalesInputDto, existingTelevision, "id");
-        return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
-    }
+  public TelevisionCompleteOutputDTO updateTelevision(Long id, TelevisionCompleteInputDto televisionCompleteInputDto) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    BeanUtils.copyProperties(televisionCompleteInputDto, existingTelevision, "id");
+    return televisionCompleteMapper.toDto(televisionRepository.save(existingTelevision));
+  }
 
-    public void updateTelevisionWithRemote(Long id, IdInputDto idInputDto) {
-        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
-        Remote remote = remoteRepository.findById(idInputDto.id).orElseThrow(() -> new RecordNotFoundException("Remote not found"));
-        television.setRemote(remote);
-        televisionRepository.save(television);
-    }
+  public TelevisionSalesOutputDto updateTelevisionSales(Long id, TelevisionSalesInputDto televisionSalesInputDto) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    BeanUtils.copyProperties(televisionSalesInputDto, existingTelevision, "id");
+    return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
+  }
 
+  public TelevisionCompleteOutputDTO updateTelevisionWithRemote(Long id, IdInputDto idInputDto) {
+    Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
+    Remote remote = remoteRepository.findById(idInputDto.id).orElseThrow(() -> new RecordNotFoundException("Remote not found"));
+    television.setRemote(remote);
+    return televisionCompleteMapper.toDto(televisionRepository.save(television));
+  }
 
-    // patch
+  public void updateTelevisionWithCIModule(Long id, IdInputDto idInputDto) {
 
-    public TelevisionCompleteOutputDTO updateTelevisionFields(Long id, TelevisionCompleteInputDto televisionCompleteInputDto) {
-        Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        setFieldsIfNotNUll(existingTelevision, televisionCompleteInputDto);
-        return televisionCompleteMapper.toDto(televisionRepository.save(existingTelevision));
-    }
+  }
 
-    public TelevisionSalesOutputDto updateTelevisionSalesFields(Long id, TelevisionSalesInputDto televisionSalesInputDto) {
-        Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        setFieldsIfNotNUll(existingTelevision, televisionSalesInputDto);
-        return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
-    }
+  // patch
 
+  public TelevisionCompleteOutputDTO updateTelevisionFields(Long id, TelevisionCompleteInputDto televisionCompleteInputDto) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    setFieldsIfNotNUll(existingTelevision, televisionCompleteInputDto);
+    return televisionCompleteMapper.toDto(televisionRepository.save(existingTelevision));
+  }
 
-    public void deleteTelevision(Long id) {
-        Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
-        televisionRepository.deleteById(id);
-    }
+  public TelevisionSalesOutputDto updateTelevisionSalesFields(Long id, TelevisionSalesInputDto televisionSalesInputDto) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    setFieldsIfNotNUll(existingTelevision, televisionSalesInputDto);
+    return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
+  }
 
+  public void deleteTelevision(Long id) {
+    Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+    televisionRepository.deleteById(id);
+  }
 
-    // Helper class to check if one of the fields is null and therefor not being set
-    // The one that is not null can only replace the field of the existing record
+  // Helper class to check if one of the fields is null and therefor not being set
+  // The one that is not null can only replace the field of the existing record
 
-    private void setFieldsIfNotNUll(Object existingObject, Object incomingObject) {
-        Field[] fields = incomingObject.getClass().getDeclaredFields();
-        for (Field dtoField : fields) {
-            dtoField.setAccessible(true);
-            try {
-                Object value = dtoField.get(incomingObject);
+  private void setFieldsIfNotNUll(Object existingObject, Object incomingObject) {
+    Field[] fields = incomingObject.getClass().getDeclaredFields();
+    for (Field dtoField : fields) {
+      dtoField.setAccessible(true);
+      try {
+        Object value = dtoField.get(incomingObject);
 
-                if (value != null) {
-                    Field enityField = existingObject.getClass().getDeclaredField(dtoField.getName());
-                    enityField.setAccessible(true);
-                    enityField.set(existingObject, value);
-                }
-            } catch (IllegalAccessException e) {
-                // This is about if the fields are accesisble and are being private or not
-                throw new GeneralException("Cannot acces fields: " + dtoField.getName());
-            } catch (NoSuchFieldException e) {
-                // This is about if the field name are not the same in this case
-                throw new GeneralException("Field not found: " + dtoField.getName());
-            }
+        if (value != null) {
+          Field enityField = existingObject.getClass().getDeclaredField(dtoField.getName());
+          enityField.setAccessible(true);
+          enityField.set(existingObject, value);
         }
+      } catch (IllegalAccessException e) {
+        // This is about if the fields are accesisble and are being private or not
+        throw new GeneralException("Cannot acces fields: " + dtoField.getName());
+      } catch (NoSuchFieldException e) {
+        // This is about if the field name are not the same in this case
+        throw new GeneralException("Field not found: " + dtoField.getName());
+      }
     }
+  }
 
 }
