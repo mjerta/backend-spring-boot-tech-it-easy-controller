@@ -8,6 +8,7 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenQ
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,6 +41,15 @@ public class Television {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "Remote_id", referencedColumnName = "id")
   private Remote remote;
-
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "cimodule_id")
+  private CIModule ciModule;
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @JoinTable (
+    name = "television_wallBrackets",
+    joinColumns = @JoinColumn(name = "televisions"),
+    inverseJoinColumns = @JoinColumn(name = "wallbracket")
+  )
+  private List<WallBracket> wallBrackets;
 
 }
