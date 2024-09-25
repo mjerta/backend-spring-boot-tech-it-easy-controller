@@ -1,10 +1,10 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.services;
 
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteInputDto;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteMapper;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteTelevisionMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete.TelevisionCompleteOutputDTO;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesInputDto;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesMapper;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesTelevisionMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesOutputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.GeneralException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 public class TelevisionService {
 
     private final TelevisionRepository televisionRepository;
-    private final TelevisionCompleteMapper televisionCompleteMapper;
-    private final TelevisionSalesMapper televisionSalesMapper;
+    private final TelevisionCompleteTelevisionMapper televisionCompleteMapper;
+    private final TelevisionSalesTelevisionMapper televisionSalesMapper;
 
-    public TelevisionService(TelevisionRepository televisionRepository, TelevisionCompleteMapper televisionCompleteMapper,
-                             TelevisionSalesMapper televisionSalesMapper) {
+    public TelevisionService(TelevisionRepository televisionRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
+                             TelevisionSalesTelevisionMapper televisionSalesMapper) {
 
         this.televisionRepository = televisionRepository;
         this.televisionCompleteMapper = televisionCompleteMapper;
