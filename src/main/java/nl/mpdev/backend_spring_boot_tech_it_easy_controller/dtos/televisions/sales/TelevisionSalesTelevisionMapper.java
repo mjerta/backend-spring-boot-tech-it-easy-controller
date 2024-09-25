@@ -18,6 +18,8 @@ public class TelevisionSalesTelevisionMapper implements TelevisionMapper<Televis
     return television;
   }
 
+
+
   public TelevisionSalesOutputDto toDto(Television television) {
     TelevisionSalesOutputDto televisionSalesOutputDto = new TelevisionSalesOutputDto();
     televisionSalesOutputDto.setId(television.getId());

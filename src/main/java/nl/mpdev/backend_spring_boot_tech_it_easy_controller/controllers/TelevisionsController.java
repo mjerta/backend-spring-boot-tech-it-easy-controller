@@ -64,6 +64,8 @@ public class TelevisionsController {
         return ResponseEntity.created(uri).body(newTelevision);
     }
 
+
+
     // PUT
     @PutMapping("/{id}")
     public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevision(@PathVariable Long id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {
@@ -75,6 +77,11 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionSales(id, televisionSalesInputDto));
     }
 
+    @PutMapping("/{id}/remote/{remoteId}")
+    public ResponseEntity<Void> addRemoteToTelevision(@PathVariable Long id, @PathVariable Long remoteId) {
+        televisionService.updateTelevisionWithRemote(id, remoteId);
+        return ResponseEntity.noContent().build();
+    }
 
     // PATCH
     @PatchMapping("/{id}")

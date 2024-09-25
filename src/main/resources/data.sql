@@ -6,3 +6,10 @@ VALUES
     ('Samsung', 'Samsung QLED Q80A', 999.99, 2, 2, 2, 2, true, true, true, true, true, true, 120, 25, '2024-09-09'),
     ('Sony', 'Sony Bravia X90J', 1299.99, 3, 3, 0, 2, true, true, true, true, true, true, 200, 50, '2024-09-08'),
     ('LEDPhilips', 'Philips Ambilight OLED', 1799.99, 2, 1, 1, 3, true, true, true, true, true, true, 80, 10, '2024-09-07');
+
+
+INSERT INTO Remotes
+(brand) values
+       (
+        'Banaan'
+       );

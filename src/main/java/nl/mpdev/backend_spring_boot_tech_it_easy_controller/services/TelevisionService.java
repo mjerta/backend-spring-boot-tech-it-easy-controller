@@ -8,7 +8,9 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sal
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesOutputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.GeneralException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Remote;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.RemoteRepository;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.TelevisionRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,11 +25,13 @@ public class TelevisionService {
     private final TelevisionRepository televisionRepository;
     private final TelevisionCompleteTelevisionMapper televisionCompleteMapper;
     private final TelevisionSalesTelevisionMapper televisionSalesMapper;
+    private final RemoteRepository remoteRepository;
 
-    public TelevisionService(TelevisionRepository televisionRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteRepository remoteRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
                              TelevisionSalesTelevisionMapper televisionSalesMapper) {
 
         this.televisionRepository = televisionRepository;
+        this.remoteRepository = remoteRepository;
         this.televisionCompleteMapper = televisionCompleteMapper;
         this.televisionSalesMapper = televisionSalesMapper;
     }
@@ -87,6 +91,12 @@ public class TelevisionService {
         return televisionSalesMapper.toDto(televisionRepository.save(existingTelevision));
     }
 
+    public void updateTelevisionWithRemote(Long id, Long remoteId) {
+        Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
+        Remote remote = remoteRepository.findById(remoteId).orElseThrow(() -> new RecordNotFoundException("Remote not found"));
+        television.setRemote(remote);
+        televisionRepository.save(television);
+    }
 
     public void deleteTelevision(Long id) {
         Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Record not found"));
