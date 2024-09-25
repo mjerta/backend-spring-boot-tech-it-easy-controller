@@ -18,7 +18,7 @@ public class Television {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
   private String brand;
   private String name;
   private Double price;
@@ -37,5 +37,6 @@ public class Television {
   private Integer originalStock;
   private Integer sold;
   private LocalDate soldDate;
+
 
 }
