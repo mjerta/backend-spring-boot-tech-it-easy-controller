@@ -1,9 +1,6 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.cimodules;
 
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.remotes.RemoteCompleteInputDto;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.remotes.RemoteCompleteOutputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.CIModule;
-import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Remote;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +9,7 @@ public class CIModuleCompleteMapper {
 
   public CIModule toEntity(CIModuleCompleteInputDto ciModuleCompleteInputDto) {
     CIModule ciModule = new CIModule();
-    BeanUtils.copyProperties(ciModule, ciModuleCompleteInputDto);
+    BeanUtils.copyProperties(ciModuleCompleteInputDto, ciModule);
     ciModule.setId(null);
     return ciModule;
   }

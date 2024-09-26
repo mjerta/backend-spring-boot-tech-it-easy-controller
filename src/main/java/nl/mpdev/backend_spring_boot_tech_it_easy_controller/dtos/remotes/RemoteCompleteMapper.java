@@ -9,7 +9,7 @@ public class RemoteCompleteMapper {
 
   public Remote toEntity(RemoteCompleteInputDto remoteCompleteInputDto) {
     Remote remote = new Remote();
-    BeanUtils.copyProperties(remote, remoteCompleteInputDto);
+    BeanUtils.copyProperties(remoteCompleteInputDto, remote);
     remote.setId(null);
     return remote;
   }

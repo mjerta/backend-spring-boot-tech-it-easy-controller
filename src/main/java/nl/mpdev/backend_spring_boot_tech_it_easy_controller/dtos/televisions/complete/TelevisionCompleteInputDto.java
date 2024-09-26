@@ -7,8 +7,8 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.Availab
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.RefreshRate;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenQuality;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenType;
-
 import java.time.LocalDate;
+
 @Getter
 @Setter
 public class TelevisionCompleteInputDto extends TelevisionBaseDto {
@@ -26,6 +26,4 @@ public class TelevisionCompleteInputDto extends TelevisionBaseDto {
   private Integer originalStock;
   private Integer sold;
   private LocalDate soldDate;
-
-
 }
