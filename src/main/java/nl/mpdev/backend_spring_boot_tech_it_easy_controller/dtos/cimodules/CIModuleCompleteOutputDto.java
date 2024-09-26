@@ -11,5 +11,4 @@ public class CIModuleCompleteOutputDto {
   private String name;
   private String type;
   private Double price;
-  private List<TelevisionCompleteOutputDTO> televisionsCompleteOutputDTOS;
 }

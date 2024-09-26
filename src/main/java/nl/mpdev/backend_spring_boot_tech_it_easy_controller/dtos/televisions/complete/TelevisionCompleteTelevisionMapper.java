@@ -1,5 +1,6 @@
 package nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.complete;
 
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.cimodules.CIModuleCompleteMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.remotes.RemoteCompleteMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.mappers.TelevisionMapper;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
@@ -11,6 +12,8 @@ public class TelevisionCompleteTelevisionMapper implements TelevisionMapper<Tele
 
   @Autowired
   private RemoteCompleteMapper remoteCompleteMapper;
+  @Autowired
+  private CIModuleCompleteMapper ciModuleCompleteMapper;
 
   public Television toEntity(TelevisionCompleteInputDto televisionCompleteInputDto) {
     Television television = new Television();
@@ -54,6 +57,9 @@ public class TelevisionCompleteTelevisionMapper implements TelevisionMapper<Tele
     televisionCompleteOutputDTO.setOriginalStock(television.getOriginalStock());
     televisionCompleteOutputDTO.setSold(television.getSold());
     televisionCompleteOutputDTO.setSoldDate(television.getSoldDate());
+    if(television.getCiModule() != null) {
+      televisionCompleteOutputDTO.setCiModuleCompleteOutputDto(ciModuleCompleteMapper.toDto(television.getCiModule()));
+    }
     if (television.getRemote() != null) {
       televisionCompleteOutputDTO.setRemoteCompleteOutputDto(remoteCompleteMapper.toDto(television.getRemote()));
     }

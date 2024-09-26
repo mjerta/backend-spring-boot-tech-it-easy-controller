@@ -9,6 +9,7 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sal
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.dtos.televisions.sales.TelevisionSalesOutputDto;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.GeneralException;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNotFoundException;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.CIModule;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Remote;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.CIModuleRepository;
@@ -92,8 +93,11 @@ public class TelevisionService {
     return televisionCompleteMapper.toDto(televisionRepository.save(television));
   }
 
-  public void updateTelevisionWithCIModule(Long id, IdInputDto idInputDto) {
-
+  public TelevisionCompleteOutputDTO updateTelevisionWithCIModule(Long id, IdInputDto idInputDto) {
+    Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
+    CIModule ciModule = ciModuleRepository.findById(idInputDto.id).orElseThrow(() -> new RecordNotFoundException("CI module not found"));
+    television.setCiModule(ciModule);
+    return televisionCompleteMapper.toDto(televisionRepository.save(television));
   }
 
   // patch

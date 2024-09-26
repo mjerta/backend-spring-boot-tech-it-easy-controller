@@ -83,6 +83,11 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionWithRemote(id, idInputDto));
     }
 
+    @PutMapping("/{id}/cimodules")
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionWithCIModule(@PathVariable Long id, @RequestBody IdInputDto idInputDto) {
+        return ResponseEntity.ok().body(televisionService.updateTelevisionWithCIModule(id, idInputDto));
+    }
+
     // PATCH
     @PatchMapping("/{id}")
     public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionFields(@PathVariable Long id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {

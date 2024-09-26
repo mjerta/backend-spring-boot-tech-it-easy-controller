@@ -41,15 +41,14 @@ public class Television {
   @JoinColumn(name = "remote_id", referencedColumnName = "id")
   private Remote remote;
 
-
-
-
-
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "cimodule_id")
   private CIModule ciModule;
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  @JoinTable (
+
+
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany()
+    @JoinTable(
     name = "television_wallBrackets",
     joinColumns = @JoinColumn(name = "televisions"),
     inverseJoinColumns = @JoinColumn(name = "wallbracket")
