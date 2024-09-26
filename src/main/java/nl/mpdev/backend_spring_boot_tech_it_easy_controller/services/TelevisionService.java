@@ -12,9 +12,11 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.exceptions.RecordNot
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.CIModule;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Remote;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.Television;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.WallBracket;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.CIModuleRepository;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.RemoteRepository;
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.TelevisionRepository;
+import nl.mpdev.backend_spring_boot_tech_it_easy_controller.repositories.WallBracketRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +30,18 @@ public class TelevisionService {
   private final TelevisionRepository televisionRepository;
   private final RemoteRepository remoteRepository;
   private final CIModuleRepository ciModuleRepository;
+  private final WallBracketRepository wallBracketRepository;
   private final TelevisionCompleteTelevisionMapper televisionCompleteMapper;
   private final TelevisionSalesTelevisionMapper televisionSalesMapper;
 
   public TelevisionService(TelevisionRepository televisionRepository, RemoteRepository remoteRepository,
-                           CIModuleRepository ciModuleRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
+                           CIModuleRepository ciModuleRepository, WallBracketRepository wallBracketRepository, TelevisionCompleteTelevisionMapper televisionCompleteMapper,
                            TelevisionSalesTelevisionMapper televisionSalesMapper) {
 
     this.televisionRepository = televisionRepository;
     this.remoteRepository = remoteRepository;
     this.ciModuleRepository = ciModuleRepository;
+    this.wallBracketRepository = wallBracketRepository;
     this.televisionCompleteMapper = televisionCompleteMapper;
     this.televisionSalesMapper = televisionSalesMapper;
   }
@@ -97,6 +101,18 @@ public class TelevisionService {
     Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
     CIModule ciModule = ciModuleRepository.findById(idInputDto.id).orElseThrow(() -> new RecordNotFoundException("CI module not found"));
     television.setCiModule(ciModule);
+    return televisionCompleteMapper.toDto(televisionRepository.save(television));
+  }
+
+  public TelevisionCompleteOutputDTO updateTelevisionWithWallBracket(Long id, List<IdInputDto> idInputDtoList) {
+    Television television = televisionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Television not found"));
+    List<WallBracket> wallBracketsFound = new ArrayList();
+    for (IdInputDto idInputDto : idInputDtoList) {
+      wallBracketsFound.add(
+        wallBracketRepository.findById(idInputDto.id).orElseThrow(() -> new RecordNotFoundException("Wallbracket module not found"))
+      );
+    }
+    television.setWallBrackets(wallBracketsFound);
     return televisionCompleteMapper.toDto(televisionRepository.save(television));
   }
 

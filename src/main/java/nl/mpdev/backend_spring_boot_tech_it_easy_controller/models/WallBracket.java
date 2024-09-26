@@ -22,5 +22,6 @@ public class WallBracket {
   //  Without mappedBy, JPA will treat this side as another owning side and create an additional join table, which is typically not
   //  desired in ManyToMany relationships.
   @ManyToMany(mappedBy = "wallBrackets")
+  // Initialize with a new ArrayList to avoid NullPointerException
   private List<Television> televisions = new ArrayList<>();
 }

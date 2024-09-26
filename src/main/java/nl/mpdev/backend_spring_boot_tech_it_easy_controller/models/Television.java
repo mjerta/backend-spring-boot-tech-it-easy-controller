@@ -8,6 +8,7 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenQ
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenType;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -57,5 +58,6 @@ public class Television {
     // Also this column name ar by default the name of Field name + _id
     inverseJoinColumns = @JoinColumn(name = "wallbracket")
   )
-  private List<WallBracket> wallBrackets;
+  // Initialize with a new ArrayList to avoid NullPointerException
+  private List<WallBracket> wallBrackets = new ArrayList<>();
 }

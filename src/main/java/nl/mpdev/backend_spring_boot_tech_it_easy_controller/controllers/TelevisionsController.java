@@ -88,6 +88,11 @@ public class TelevisionsController {
         return ResponseEntity.ok().body(televisionService.updateTelevisionWithCIModule(id, idInputDto));
     }
 
+    @PutMapping("/{id}/wallbrackets")
+    public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionWithWallBracket(@PathVariable Long id, @RequestBody List<IdInputDto> idInputDtos) {
+        return ResponseEntity.ok().body(televisionService.updateTelevisionWithWallBracket(id, idInputDtos));
+    }
+
     // PATCH
     @PatchMapping("/{id}")
     public ResponseEntity<TelevisionCompleteOutputDTO> updateTelevisionFields(@PathVariable Long id, @Valid @RequestBody TelevisionCompleteInputDto televisionCompleteInputDto) {

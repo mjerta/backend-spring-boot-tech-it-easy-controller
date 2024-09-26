@@ -25,3 +25,9 @@ VALUES ('CI Module A1', 'Basic', 29.99),
        ('CI Module C3', 'Premium', 69.99),
        ('CI Module D4', 'Ultra', 89.99),
        ('CI Module E5', 'Standard', 39.99);
+
+INSERT INTO Wallbrackets (size, adjustable, name, price)
+VALUES ('Small', TRUE, 'Compact Wall Bracket', 29.99),
+       ('Medium', TRUE, 'Standard Wall Bracket', 39.99),
+       ('Large', FALSE, 'Heavy-Duty Wall Bracket', 59.99),
+       ('Extra Large', TRUE, 'Adjustable Wall Bracket', 79.99);
