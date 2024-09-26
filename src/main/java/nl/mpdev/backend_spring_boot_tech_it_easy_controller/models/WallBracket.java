@@ -18,6 +18,9 @@ public class WallBracket {
   private Boolean adjustable;
   private String name;
   private Double price;
+  // Use 'mappedBy' to specify that Television owns the relationship
+  //  Without mappedBy, JPA will treat this side as another owning side and create an additional join table, which is typically not
+  //  desired in ManyToMany relationships.
   @ManyToMany(mappedBy = "wallBrackets")
   private List<Television> televisions = new ArrayList<>();
 }

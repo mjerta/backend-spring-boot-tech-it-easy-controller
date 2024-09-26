@@ -41,16 +41,20 @@ public class Television {
   @JoinColumn(name = "remote_id", referencedColumnName = "id")
   private Remote remote;
 
+
+  // EAGER: Loads all associated entities immediately. Good for known required associations but can lead to performance issues with large graphs.
+  // LAZY: Loads associated entities on demand. Generally better for performance but requires careful management to avoid performance pitfalls.
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "cimodule_id")
   private CIModule ciModule;
 
 
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @ManyToMany()
-    @JoinTable(
-    name = "television_wallBrackets",
-    joinColumns = @JoinColumn(name = "televisions"),
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Use PERSIST and MERGE to handle new and existing associations
+  @JoinTable(
+    name = "television_wallbrackets",
+    // By default the name gets the of the owners class name + _id
+    joinColumns = @JoinColumn(name = "television"),
+    // Also this column name ar by default the name of Field name + _id
     inverseJoinColumns = @JoinColumn(name = "wallbracket")
   )
   private List<WallBracket> wallBrackets;
