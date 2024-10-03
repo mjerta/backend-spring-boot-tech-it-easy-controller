@@ -8,17 +8,16 @@ import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenQ
 import nl.mpdev.backend_spring_boot_tech_it_easy_controller.models.enums.ScreenType;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "Televisions")
 public class Television {
-//   Simulating the counter from an automatic increment from a database
-//  private static  int idCounter;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
   private String brand;
   private String name;
   private Double price;
@@ -37,5 +36,28 @@ public class Television {
   private Integer originalStock;
   private Integer sold;
   private LocalDate soldDate;
+  @OneToOne(cascade = CascadeType.ALL)
+  // remote_id is also the default based on the attribute name + the _id
+  // Also the referencedColumnname the default will be assigned to the primary key of the target enitty
+  @JoinColumn(name = "remote_id", referencedColumnName = "id")
+  private Remote remote;
 
+
+  // EAGER: Loads all associated entities immediately. Good for known required associations but can lead to performance issues with large graphs.
+  // LAZY: Loads associated entities on demand. Generally better for performance but requires careful management to avoid performance pitfalls.
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "cimodule_id")
+  private CIModule ciModule;
+
+
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Use PERSIST and MERGE to handle new and existing associations
+  @JoinTable(
+    name = "television_wallbrackets",
+    // By default the name gets the of the owners class name + _id
+    joinColumns = @JoinColumn(name = "television"),
+    // Also this column name ar by default the name of Field name + _id
+    inverseJoinColumns = @JoinColumn(name = "wallbracket")
+  )
+  // Initialize with a new ArrayList to avoid NullPointerException
+  private List<WallBracket> wallBrackets = new ArrayList<>();
 }
